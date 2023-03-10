@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 export default function EmployeeForm(props) {
     const [employee, setEmployee] = useState({
+        id: props.employeeData ? props.employeeData.id : '',
         name: props.employeeData ? props.employeeData.name : '',
         email: props.employeeData ? props.employeeData.email : '',
         phone: props.employeeData ? props.employeeData.phone : '',

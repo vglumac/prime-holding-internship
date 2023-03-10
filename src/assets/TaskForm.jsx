@@ -3,18 +3,20 @@ import { useState } from 'react'
 
 export default function TaskForm(props) {
     const [task, setTask] = useState({
+        id: props.taskData ? props.taskData.id : '',
         title: props.taskData ? props.taskData.title : '',
         description: props.taskData ? props.taskData.description : '',
         assignedTo: props.taskData ? props.taskData.assignedTo : '',
         dueDate: props.taskData ? props.taskData.dueDate : '',
-        isCompleted: ''
+        isCompleted: props.taskData ? props.taskData.isCompleted : false
     })
 
     function handleChange(e) {
+        const {name, value, type, checked} = e.target;
         setTask(prev => {
             return {
                 ...prev,
-                [e.target.name]: e.target.value
+                [name]: type === 'checkbox' ? checked : value
                 }
         })
     }
@@ -25,7 +27,7 @@ export default function TaskForm(props) {
             props.createNewTask(task);
             props.setAddTask(false);
         } else {
-            props.updateTask(task, props.taskData.id);
+            props.updateTask(task);
         }
     }
 
@@ -60,7 +62,7 @@ export default function TaskForm(props) {
                         value={task.assignedTo}
                         onChange={handleChange}
                     >
-                        <option>None</option>
+                        <option value=''>None</option>
                         {props.employees.map(employee => <option key={employee.id} value={employee.id}>{employee.name}</option>)}
                     </select>
                 </label>
@@ -73,9 +75,9 @@ export default function TaskForm(props) {
                 </label>
                 <label>Completed
                     <input
-                        name='dueDate'
+                        name='isCompleted'
                         type='checkbox'
-                        value={task.completed}
+                        checked={task.isCompleted}
                         onChange={handleChange}
                     />
                 </label>

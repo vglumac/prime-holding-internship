@@ -1,15 +1,18 @@
-import React from 'react'
-import { useState } from 'react'
+import React from 'react';
+import { useState } from 'react';
+import Select from 'react-select';
 
 export default function ProjectForm(props) {
     const [project, setProject] = useState({
+        id: props.projectData ? props.projectData.id : '',
         title: props.projectData ? props.projectData.title : '',
         description: props.projectData ? props.projectData.description : '',
-        tasks: props.projectData ? {...props.projectData.tasks} : '',        
-        isCompleted: ''
+        tasks: props.projectData ? props.projectData.tasks : '',
+        numOfAssignedTasks: props.projectData ? props.projectData.numOfAssignedTasks : '',
+        numOfCompletedTasks: props.projectData ? props.projectData.numOfCompletedTasks : ''
     })
 
-    function handleChange(e) {
+        function handleChange(e) {
         setProject(prev => {
             return {
                 ...prev,
@@ -18,25 +21,34 @@ export default function ProjectForm(props) {
         })
     }
 
-    // function handleConfirm(e) {
-    //     e.preventDefault();
-    //     if (!props.taskData) {
-    //         props.createNewTask(task);
-    //         props.setAddTask(false);
-    //     } else {
-    //         props.updateTask(task, props.taskData.id);
-    //     }
-        
-    // }
+    function handleChangeSelect(data) {
+        setProject(prev => {
+            return {
+                ...prev,
+                tasks: data
+            }
+        })
+    }
 
-    // function handleCancel() {
-    //     if (!props.taskData) {
-    //         props.setAddTask(false);
-    //     } else {
-    //         props.setActiveTask(null);
-    //     }
-        
-    // }
+    function handleConfirm(e) {
+        e.preventDefault();
+        if (!props.projectData) {
+            props.createNewProject(project);
+            props.setAddProject(false);
+        } else {
+            props.updateProject(project);
+        }
+
+    }
+
+    function handleCancel() {
+        if (!props.projectData) {
+            props.setAddProject(false);
+        } else {
+            props.setActiveProject(null);
+        }
+
+    }
 
     return (
         <>
@@ -56,13 +68,17 @@ export default function ProjectForm(props) {
                     />
                 </label>
                 <label>Tasks:
-                    <select>
-                        {props.tasks.map(task => <option>{task}</option>)}
-                    </select>                       
+                    <Select
+                        options={props.tasks.map(task => ({ value: task.id, label: task.title, isCompleted: task.isCompleted }))}
+                        placeholder='Select tasks'
+                        value={project.tasks}
+                        onChange={handleChangeSelect}
+                        isSearchable
+                        isMulti
+                    />
                 </label>
-                
-                <button >Confirm</button>
-                <button type='button' >Cancel</button>
+                <button onClick={handleConfirm}>Confirm</button>
+                <button type='button' onClick={handleCancel}>Cancel</button>
             </form>
 
         </>

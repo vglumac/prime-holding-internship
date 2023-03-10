@@ -34,6 +34,7 @@ export default function Tasks(props) {
         <div key={task.id}>
             <div className="item-header">
                 <h4>{task.title}</h4>
+                {task.assignedTo === '' && <span>Not assigned!</span>}
                 <span onClick={() => toggleShowTask(task)} className={classIcon(task)}></span>
             </div>
             {!isUpdating(task) && task.isOpened &&
@@ -41,7 +42,7 @@ export default function Tasks(props) {
                     <div>Description: {task.description}</div>
                     <div>Due date: {task.dueDate}</div>
                     <div>Assigned to: {getAssignedToName(task)}</div>
-                    <div>Completed: {task.completed ? "Yes" : "No"}</div>
+                    <div>Completed: {task.isCompleted ? "Yes" : "No"}</div>
                     <button onClick={() => handleUpdateClick(task)}><span className="icon-icon-edit"></span> Edit</button>
                     <button onClick={() => handleDeleteClick(task)}><span className="icon-icon-delete"></span> Delete</button>
                 </div>}
