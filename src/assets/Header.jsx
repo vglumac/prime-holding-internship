@@ -17,7 +17,7 @@ export default function Header(props) {
 
     return (
         <header className='header'>
-            <h1 className='header__title'>Task manager</h1>
+            <h1 className='header__title'>Task tracker</h1>
             <div className='header__stats'>
                 <div className='header__top-five'>
                     <h3 className='header__top-five-title'><span className="icon-trophy"></span>Top 5<span className="icon-trophy"></span></h3>
