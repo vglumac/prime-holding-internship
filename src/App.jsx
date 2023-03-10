@@ -25,6 +25,7 @@ function App() {
     localStorage.setItem('projects', JSON.stringify(projects));
   }, [tasks, employees, projects])
 
+  console.log(tasks)
   //Update number of assigned tasks
 
   useEffect(() => {
@@ -81,6 +82,7 @@ function App() {
       return prevTasks.map(task => {
         if (updatedTaskId === task.id) {
           return {
+            ...task,
             title: updatedTask.title,
             description: updatedTask.description,
             assignedTo: updatedTask.assignedTo,

@@ -5,7 +5,7 @@ export default function TaskForm(props) {
     const [task, setTask] = useState({
         title: props.taskData ? props.taskData.title : '',
         description: props.taskData ? props.taskData.description : '',
-        assignedTo: props.taskData ? { assigneeName: props.taskData.assignedTo.assigneeName, assigneeId: props.taskData.assignedTo.assigneeId } : { assigneeName: '', assigneeId: '' },
+        assignedTo: props.taskData ? props.taskData.assignedTo : '',
         dueDate: props.taskData ? props.taskData.dueDate : '',
         isCompleted: ''
     })
@@ -14,13 +14,8 @@ export default function TaskForm(props) {
         setTask(prev => {
             return {
                 ...prev,
-                [e.target.name]: e.target.type !== 'select-one' ?
-                    e.target.value :
-                    {
-                        assigneeId: e.target.value, 
-                        assigneeName: props.employees.filter(employee => employee.id === e.target.value)[0].name
-                    }
-            }
+                [e.target.name]: e.target.value
+                }
         })
     }
 
@@ -62,9 +57,10 @@ export default function TaskForm(props) {
                 <label>Assign to:
                     <select
                         name='assignedTo'
-                        value={task.assignedTo.assigneeId}
+                        value={task.assignedTo}
                         onChange={handleChange}
                     >
+                        <option>None</option>
                         {props.employees.map(employee => <option key={employee.id} value={employee.id}>{employee.name}</option>)}
                     </select>
                 </label>

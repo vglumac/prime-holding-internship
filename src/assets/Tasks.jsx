@@ -20,6 +20,16 @@ export default function Tasks(props) {
         props.setActiveTask({ id: task.id, type: 'updating' })
     }
 
+    function getAssignedToName(task) {
+        let employeeName;
+        props.employees.forEach(employee => {            
+            if (task.assignedTo === employee.id) {
+                employeeName = employee.name;
+            }
+        })
+        return employeeName;
+    }
+
     const displayTasks = props.tasks.map(task => (
         <div key={task.id}>
             <div className="item-header">
@@ -30,7 +40,7 @@ export default function Tasks(props) {
                 <div>
                     <div>Description: {task.description}</div>
                     <div>Due date: {task.dueDate}</div>
-                    <div>Assigned to: {task.assignedTo.assigneeName}</div>
+                    <div>Assigned to: {getAssignedToName(task)}</div>
                     <div>Completed: {task.completed ? "Yes" : "No"}</div>
                     <button onClick={() => handleUpdateClick(task)}><span className="icon-icon-edit"></span> Edit</button>
                     <button onClick={() => handleDeleteClick(task)}><span className="icon-icon-delete"></span> Delete</button>
