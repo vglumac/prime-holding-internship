@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
-import Header from './assets/Header'
-import Tasks from './assets/Tasks'
-import Employees from './assets/Employees'
-import Projects from './assets/Projects'
+import { useState, useEffect } from 'react';
+import Header from './assets/Header';
+import Tasks from './assets/Tasks';
+import Employees from './assets/Employees';
+import Projects from './assets/Projects';
 
 import { nanoid } from 'nanoid'
 import './App.css'
