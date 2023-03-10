@@ -91,8 +91,8 @@ export default function EmployeeForm(props) {
                         />
                     </label>
                     <div className='group-buttons'>
-                        <button onClick={handleConfirm}>Confirm</button>
                         <button type='button' onClick={handleCancel}>Cancel</button>
+                        <button onClick={handleConfirm}>Confirm</button>
                     </div>
                 </form>
             </div>
