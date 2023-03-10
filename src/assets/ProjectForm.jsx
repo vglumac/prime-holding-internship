@@ -12,7 +12,7 @@ export default function ProjectForm(props) {
         numOfCompletedTasks: props.projectData ? props.projectData.numOfCompletedTasks : ''
     })
 
-        function handleChange(e) {
+    function handleChange(e) {
         setProject(prev => {
             return {
                 ...prev,
@@ -51,36 +51,41 @@ export default function ProjectForm(props) {
     }
 
     return (
-        <>
-            <form>
-                <label>Title:
-                    <input
-                        name='title'
-                        value={project.title}
-                        onChange={handleChange}
-                    />
-                </label>
-                <label>Description:
-                    <textarea
-                        name='description'
-                        value={project.description}
-                        onChange={handleChange}
-                    />
-                </label>
-                <label>Tasks:
-                    <Select
-                        options={props.tasks.map(task => ({ value: task.id, label: task.title, isCompleted: task.isCompleted }))}
-                        placeholder='Select tasks'
-                        value={project.tasks}
-                        onChange={handleChangeSelect}
-                        isSearchable
-                        isMulti
-                    />
-                </label>
-                <button onClick={handleConfirm}>Confirm</button>
-                <button type='button' onClick={handleCancel}>Cancel</button>
-            </form>
-
-        </>
+        <div className='modal-container'>
+            <div className='modal'>
+                <div className='modal__title'>Project details:</div>
+                <form>
+                    <label>Title:
+                        <input
+                            name='title'
+                            type='text'
+                            value={project.title}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <label>Description:
+                        <textarea
+                            name='description'
+                            value={project.description}
+                            onChange={handleChange}
+                        />
+                    </label>
+                    <label>Tasks:
+                        <Select
+                            options={props.tasks.map(task => ({ value: task.id, label: task.title, isCompleted: task.isCompleted }))}
+                            placeholder='Select tasks'
+                            value={project.tasks}
+                            onChange={handleChangeSelect}
+                            isSearchable
+                            isMulti
+                        />
+                    </label>
+                    <div className='group-buttons'>
+                        <button onClick={handleConfirm}>Confirm</button>
+                        <button type='button' onClick={handleCancel}>Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     )
 }

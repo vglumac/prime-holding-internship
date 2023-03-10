@@ -143,7 +143,6 @@ function App() {
     })
     setActiveEmployee(null);
   }
-  console.log(projects)
 
   function updateProject(updatedProject) {
     setProjects(prevProjects => {
@@ -223,12 +222,20 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header
+        employeesData={employees}
+        tasksData={tasks}
+      />
       <main>
         <section>
-          <div className="section-header">
-            <h2>Tasks</h2>
-            <button onClick={() => setAddTask(true)}>NEW TASK</button>
+          <div className="section__header">
+            <div>
+              <h2>Tasks</h2>
+              <p>Assign task to your employees</p>
+            </div>
+            <div className='button-container'>
+              <button onClick={() => setAddTask(true)}><span class="icon-icon-plus"></span>NEW TASK</button>
+            </div>
           </div>
           <Tasks
             tasks={tasks}
@@ -246,9 +253,14 @@ function App() {
           />
         </section>
         <section>
-          <div className="section-header">
-            <h2>Employees</h2>
-            <button onClick={() => setAddEmployee(true)}>NEW EMPLOYEE</button>
+          <div className="section__header">
+            <div>
+              <h2>Employees</h2>
+              <p>Enter employees' info</p>
+            </div>
+            <div className='button-container'>
+              <button onClick={() => setAddEmployee(true)}><span class="icon-icon-plus"></span>NEW EMPLOYEE</button>
+            </div>
           </div>
           <Employees
             employees={employees}
@@ -266,10 +278,14 @@ function App() {
         </section>
       </main>
       <section>
-        <div className="section-header">
-          <h2>Projects</h2>
-          <p>Organize your tasks by projects</p>
-          <button onClick={() => setAddProject(true)}>NEW PROJECT</button>
+        <div className="section__header">
+          <div>
+            <h2>Projects</h2>
+            <p>Organize your tasks by projects</p>
+          </div>
+          <div className='button-container'>
+            <button onClick={() => setAddProject(true)}><span class="icon-icon-plus"></span>NEW PROJECT</button>
+          </div>
         </div>
         <Projects
           projects={projects}

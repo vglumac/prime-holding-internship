@@ -22,7 +22,7 @@ export default function Employees(props) {
 
     const displayEmployees = props.employees.map(employee => (
         <div key={employee.id}>
-            <div className="item-header">
+            <div className="item__header">
                 <h4>{employee.name}</h4>
                 <span onClick={() => toggleShowEmployee(employee)} className={classIcon(employee)}></span>
             </div>
@@ -32,8 +32,8 @@ export default function Employees(props) {
                     <div>Phone number: {employee.phone}</div>
                     <div>Date of birth: {employee.dob}</div>
                     <div>Salary: {employee.salary}</div>
-                    <button onClick={() => handleUpdateClick(employee)}><span className="icon-icon-edit"></span> Edit</button>
-                    <button onClick={() => handleDeleteClick(employee)}><span className="icon-icon-delete"></span> Delete</button>
+                    <button onClick={() => handleUpdateClick(employee)}><span className="icon-icon-edit"></span>Edit</button>
+                    <button onClick={() => handleDeleteClick(employee)}><span className="icon-icon-delete"></span>Delete</button>
                 </div>}
             {isUpdating(employee) &&
                 <div>
@@ -46,6 +46,7 @@ export default function Employees(props) {
             {isDeleting(employee) &&
                 <DeleteModal
                     id={employee.id}
+                    item='employee'
                     closeModal={() => props.setConfirmDeleteModal(null)}
                     confirmDelete={props.deleteEmployee}
                 />}

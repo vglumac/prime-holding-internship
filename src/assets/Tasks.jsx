@@ -31,20 +31,22 @@ export default function Tasks(props) {
     }
 
     const displayTasks = props.tasks.map(task => (
-        <div key={task.id}>
-            <div className="item-header">
+        <div key={task.id} className='item'>
+            <div className='item__header'>
                 <h4>{task.title}</h4>
-                {task.assignedTo === '' && <span>Not assigned!</span>}
+                {task.assignedTo === '' && <span className='error-message'><span class="icon-notification"></span>Task is not assigned</span>}
                 <span onClick={() => toggleShowTask(task)} className={classIcon(task)}></span>
             </div>
             {!isUpdating(task) && task.isOpened &&
-                <div>
+                <div className='item__content'>
                     <div>Description: {task.description}</div>
                     <div>Due date: {task.dueDate}</div>
                     <div>Assigned to: {getAssignedToName(task)}</div>
                     <div>Completed: {task.isCompleted ? "Yes" : "No"}</div>
-                    <button onClick={() => handleUpdateClick(task)}><span className="icon-icon-edit"></span> Edit</button>
-                    <button onClick={() => handleDeleteClick(task)}><span className="icon-icon-delete"></span> Delete</button>
+                    <div className='group-buttons'>
+                        <button onClick={() => handleUpdateClick(task)}><span className="icon-icon-edit"></span>Edit</button>
+                        <button onClick={() => handleDeleteClick(task)}><span className="icon-icon-delete"></span>Delete</button>
+                    </div>
                 </div>}
             {isUpdating(task) &&
                 <div>
@@ -58,6 +60,7 @@ export default function Tasks(props) {
             {isDeleting(task) &&
                 <DeleteModal
                     id={task.id}
+                    item='task'
                     closeModal={() => props.setConfirmDeleteModal(null)}
                     confirmDelete={props.deleteTask}
                 />}

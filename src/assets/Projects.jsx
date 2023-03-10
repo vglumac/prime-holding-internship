@@ -23,7 +23,7 @@ export default function Projects(props) {
         if (project.tasks.length > 0) {
             return (
                 <ul>
-                    {project.tasks.map(task => <li>{task.label}</li>)}
+                    {project.tasks.map(task => <li key={task.value}>{task.label}</li>)}
                 </ul>
             )
         }
@@ -32,7 +32,7 @@ export default function Projects(props) {
 
     const displayProjects = props.projects.map(project => (
         <div key={project.id}>
-            <div className="item-header">
+            <div className="item__header">
                 <h4>{project.title}</h4>
                 <span onClick={() => toggleShowProject(project)} className={classIcon(project)}></span>
             </div>
@@ -42,8 +42,8 @@ export default function Projects(props) {
 
                     <div>Tasks: {getTasks(project)}</div>
                     <div>Completed: {Math.floor(project.numOfCompletedTasks / project.numOfAssignedTasks * 100)} %</div>
-                    <button onClick={() => handleUpdateClick(project)}><span className="icon-icon-edit"></span> Edit</button>
-                    <button onClick={() => handleDeleteClick(project)}><span className="icon-icon-delete"></span> Delete</button>
+                    <button onClick={() => handleUpdateClick(project)}><span className="icon-icon-edit"></span>Edit</button>
+                    <button onClick={() => handleDeleteClick(project)}><span className="icon-icon-delete"></span>Delete</button>
                 </div>}
             {isUpdating(project) &&
                 <div>
@@ -57,6 +57,7 @@ export default function Projects(props) {
             {isDeleting(project) &&
                 <DeleteModal
                     id={project.id}
+                    item='project'
                     closeModal={() => props.setConfirmDeleteModal(null)}
                     confirmDelete={props.deleteProject}
                 />}
