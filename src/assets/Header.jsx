@@ -12,7 +12,7 @@ export default function Header(props) {
     const displayedPercentage = percentageOfCompletedTasks ? percentageOfCompletedTasks : 0;
 
     const styles = {
-        backgroundImage: `conic-gradient(#747bff ${percentageOfCompletedTasks}%, #ccc 0)`
+        backgroundImage: percentageOfCompletedTasks ? `conic-gradient(#747bff ${percentageOfCompletedTasks}%, #ccc 0)` : '#ccc'
     }
 
     return (
