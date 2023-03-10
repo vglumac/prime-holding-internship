@@ -8,7 +8,8 @@ export default function Tasks(props) {
     const isUpdating = (task) => props.activeTask && props.activeTask.type === 'updating' && props.activeTask.id === task.id;
     const classIcon = (task) => task.isOpened ? "icon-circle-up" : "icon-circle-down";
 
-    function toggleShowTask(task) {
+    function toggleShowTask(e, task) {
+        e.stopPropagation();
         props.openTask(task.id);
     }
 
@@ -20,20 +21,33 @@ export default function Tasks(props) {
         props.setActiveTask({ id: task.id, type: 'updating' })
     }
 
+    function getAssignedToName(task) {
+        let employeeName;
+        props.employees.forEach(employee => {            
+            if (task.assignedTo === employee.id) {
+                employeeName = employee.name;
+            }
+        })
+        return employeeName;
+    }
+
     const displayTasks = props.tasks.map(task => (
-        <div key={task.id}>
-            <div className="item-header">
-                <h4>{task.title}</h4>
-                <span onClick={() => toggleShowTask(task)} className={classIcon(task)}></span>
+        <div key={task.id} className='item'>
+            <div className='item__header' onClick={(event) => toggleShowTask(event, task)}>
+                <h4 className='item__title'>{task.title}</h4>
+                {task.assignedTo === '' && <span className='error-message'><span className="icon-notification"></span>Task is not assigned</span>}
+                <span onClick={(event) => toggleShowTask(event, task)} className={classIcon(task)}></span>
             </div>
             {!isUpdating(task) && task.isOpened &&
-                <div>
+                <div className='item__content'>
                     <div>Description: {task.description}</div>
                     <div>Due date: {task.dueDate}</div>
-                    <div>Assigned to: {task.assignedTo.assigneeName}</div>
-                    <div>Completed: {task.completed ? "Yes" : "No"}</div>
-                    <button onClick={() => handleUpdateClick(task)}><span className="icon-icon-edit"></span> Edit</button>
-                    <button onClick={() => handleDeleteClick(task)}><span className="icon-icon-delete"></span> Delete</button>
+                    <div>Assigned to: {getAssignedToName(task)}</div>
+                    <div>Completed: {task.isCompleted ? "Yes" : "No"}</div>
+                    <div className='group-buttons'>
+                        <button onClick={() => handleUpdateClick(task)}><span className="icon-icon-edit"></span>Edit</button>
+                        <button onClick={() => handleDeleteClick(task)}><span className="icon-icon-delete"></span>Delete</button>
+                    </div>
                 </div>}
             {isUpdating(task) &&
                 <div>
@@ -47,6 +61,7 @@ export default function Tasks(props) {
             {isDeleting(task) &&
                 <DeleteModal
                     id={task.id}
+                    item='task'
                     closeModal={() => props.setConfirmDeleteModal(null)}
                     confirmDelete={props.deleteTask}
                 />}
@@ -55,7 +70,7 @@ export default function Tasks(props) {
 
     return (
         <>
-            {props.tasks.length > 0 ? displayTasks : <p>You have no tasks. Click on "NEW TASK" to get started!</p>}
+            {props.tasks.length > 0 ? displayTasks : <p className='info-message'>You have no tasks. Click on "NEW TASK" to get started!</p>}
             {props.addTask &&
                 <TaskForm                    
                     employees={props.employees}

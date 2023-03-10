@@ -8,7 +8,8 @@ export default function Employees(props) {
     const isUpdating = (employee) => props.activeEmployee && props.activeEmployee.type === 'updating' && props.activeEmployee.id === employee.id;
     const classIcon = (employee) => employee.isOpened ? "icon-circle-up" : "icon-circle-down";
 
-    function toggleShowEmployee(employee) {
+    function toggleShowEmployee(e, employee) {
+        e.stopPropagation();
         props.openEmployee(employee.id);
     }
 
@@ -21,19 +22,21 @@ export default function Employees(props) {
     }
 
     const displayEmployees = props.employees.map(employee => (
-        <div key={employee.id}>
-            <div className="item-header">
-                <h4>{employee.name}</h4>
-                <span onClick={() => toggleShowEmployee(employee)} className={classIcon(employee)}></span>
+        <div key={employee.id} className='item'>
+            <div className="item__header" onClick={(e) => toggleShowEmployee(e, employee)}>
+                <h4 className='item__title'>{employee.name}</h4>
+                <span onClick={(e) => toggleShowEmployee(e, employee)} className={classIcon(employee)}></span>
             </div>
             {!isUpdating(employee) && employee.isOpened &&
-                <div>
+                <div className='item__content'>
                     <div>E-mail: {employee.email}</div>
                     <div>Phone number: {employee.phone}</div>
                     <div>Date of birth: {employee.dob}</div>
                     <div>Salary: {employee.salary}</div>
-                    <button onClick={() => handleUpdateClick(employee)}><span className="icon-icon-edit"></span> Edit</button>
-                    <button onClick={() => handleDeleteClick(employee)}><span className="icon-icon-delete"></span> Delete</button>
+                    <div className='group-buttons'>
+                        <button onClick={() => handleUpdateClick(employee)}><span className="icon-icon-edit"></span>Edit</button>
+                        <button onClick={() => handleDeleteClick(employee)}><span className="icon-icon-delete"></span>Delete</button>
+                    </div>
                 </div>}
             {isUpdating(employee) &&
                 <div>
@@ -46,6 +49,7 @@ export default function Employees(props) {
             {isDeleting(employee) &&
                 <DeleteModal
                     id={employee.id}
+                    item='employee'
                     closeModal={() => props.setConfirmDeleteModal(null)}
                     confirmDelete={props.deleteEmployee}
                 />}
@@ -54,7 +58,7 @@ export default function Employees(props) {
 
     return (
         <>
-            {props.employees.length > 0 ? displayEmployees : <p>Click on "NEW EMPLOYEE" to get started"</p>}
+            {props.employees.length > 0 ? displayEmployees : <p className='info-message'>Click on "NEW EMPLOYEE" to get started"</p>}
             {props.addEmployee &&
                 <EmployeeForm
                     setAddEmployee={props.setAddEmployee}

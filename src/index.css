@@ -14,11 +14,18 @@
   -webkit-text-size-adjust: 100%;
 }
 
+@media(max-width: 800px) {
+  :root {
+    font-size: 12px;
+  }
+}
+
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -30,15 +37,68 @@ body {
 
 main {
   display: flex;
-  gap: 2rem;
+  gap: 2em;
   width: 100%;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 section {
   width: 100%;
-  outline: 1px solid green;
+  margin-bottom: 2em;
+}
+
+input,
+textarea,
+select {
+  display: block;
+  width: 100%;
+  padding: 0.8em;
+  margin: 0.rem 0;
+  border-radius: 5px;
+  border: 1px solid #DEDDDF;
+}
+
+textarea {
+  resize: none;
+  height: 5em;
+}
+
+label:has(input[type='checkbox']) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+input[type='checkbox'] {
+  appearance: none;
+  display: inline-block;
+  position: relative;
+  height: 1.5em;
+  width: 1.5em;  
+  margin: 5px;
+  border: 1px solid #34495E;
+  border-radius: 50%;
+  outline: none;
+  transition-duration: 0.3s;
+  cursor: pointer;  
+}
+
+input[type='checkbox']:checked {
+  background-color: #34495E;
+}
+
+input[type='checkbox']:checked::before {
+  content: '\2713';
+  text-align: center;
+  color: #FFF;
+  position: absolute;
+  top: 5%;
+  left: 25%;
+}
+
+.select {
+  color: #242424;
 }
 
 @media(max-width: 800px) {
@@ -52,12 +112,14 @@ section {
 
   main {
     flex-direction: column;
+    gap: 0;
   }
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  margin-bottom: 1em;
 }
 
 button {
@@ -71,12 +133,44 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+.button--red {
+  color: #F5F6FA;
+  background-color: #ED6468;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.group-buttons{
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+}
+
+.error-message {
+  color: #ED6468;
+  padding: 0 1em;
+}
+
+.info-message {
+  color: #646cff;
+  font-style: italic;
 }
 
 @media (prefers-color-scheme: light) {
@@ -84,10 +178,12 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
-    background-color: #f9f9f9;
+    background-color: #e8e8e8;
   }
 }
