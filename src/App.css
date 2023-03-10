@@ -211,14 +211,23 @@
   padding: 0.3em 0.5em;
 }
 
+.item__title {
+  margin-right: auto;
+}
+
 .item__content {
   padding: 0.3em 0.5em;
+}
+
+.item-list {
+  margin-left: 2em;
 }
 
 @media (prefers-color-scheme: light) {
   .item {
     background-color: #f9f9f9;
   }
+
   .item__header {
     background-color: #e8e8e8;
   }
@@ -247,11 +256,6 @@
 .modal__title,
 .modal__message {
   margin-bottom: 1em;
-}
-
-.modal__button--red {
-  color: #F5F6FA;
-  background-color: #ED6468;
 }
 
 @media (prefers-color-scheme: light) {

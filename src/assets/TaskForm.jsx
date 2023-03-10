@@ -22,6 +22,10 @@ export default function TaskForm(props) {
     }
 
     function handleConfirm(e) {
+        let isFormValid = e.target.form.checkValidity();
+        if (!isFormValid) {
+            return e.target.form.reportValidity();
+        }
         e.preventDefault();
         if (!props.taskData) {
             props.createNewTask(task);
@@ -46,9 +50,11 @@ export default function TaskForm(props) {
                 <form>
                     <label>Title:
                         <input
-                            name='title'                            
+                            name='title'
                             value={task.title}
                             onChange={handleChange}
+                            maxLength={30}
+                            required
                         />
                     </label>
                     <label>Description:
@@ -73,7 +79,7 @@ export default function TaskForm(props) {
                             name='dueDate'
                             type='date'
                             value={task.dueDate}
-                            onChange={handleChange}                            
+                            onChange={handleChange}
                         />
                     </label>
                     <label>

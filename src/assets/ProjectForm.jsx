@@ -31,6 +31,10 @@ export default function ProjectForm(props) {
     }
 
     function handleConfirm(e) {
+        let isFormValid = e.target.form.checkValidity();
+        if (!isFormValid) {
+            return e.target.form.reportValidity();
+        }
         e.preventDefault();
         if (!props.projectData) {
             props.createNewProject(project);
@@ -61,6 +65,7 @@ export default function ProjectForm(props) {
                             type='text'
                             value={project.title}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                     <label>Description:
@@ -72,6 +77,7 @@ export default function ProjectForm(props) {
                     </label>
                     <label>Tasks:
                         <Select
+                            className='select'
                             options={props.tasks.map(task => ({ value: task.id, label: task.title, isCompleted: task.isCompleted }))}
                             placeholder='Select tasks'
                             value={project.tasks}

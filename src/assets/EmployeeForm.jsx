@@ -21,6 +21,10 @@ export default function EmployeeForm(props) {
     }
 
     function handleConfirm(e) {
+        let isFormValid = e.target.form.checkValidity();
+        if (!isFormValid) {
+            return e.target.form.reportValidity();
+        }
         e.preventDefault();
         if (!props.employeeData) {
             props.createNewEmployee(employee);
@@ -45,11 +49,12 @@ export default function EmployeeForm(props) {
                 <div className='modal__title'>Employee details:</div>
                 <form>
                     <label>Full Name:
-                        <input
+                        <input                            
                             name='name'
                             type='text'
                             value={employee.name}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                     <label>E-mail:
@@ -58,6 +63,7 @@ export default function EmployeeForm(props) {
                             type='email'
                             value={employee.email}
                             onChange={handleChange}
+                            required
                         />
                     </label>
                     <label>Phone number:

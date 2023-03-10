@@ -234,7 +234,7 @@ function App() {
               <p>Assign task to your employees</p>
             </div>
             <div className='button-container'>
-              <button onClick={() => setAddTask(true)}><span class="icon-icon-plus"></span>NEW TASK</button>
+              <button onClick={() => setAddTask(true)}><span className="icon-icon-plus"></span>NEW TASK</button>
             </div>
           </div>
           <Tasks
@@ -259,7 +259,7 @@ function App() {
               <p>Enter employees' info</p>
             </div>
             <div className='button-container'>
-              <button onClick={() => setAddEmployee(true)}><span class="icon-icon-plus"></span>NEW EMPLOYEE</button>
+              <button onClick={() => setAddEmployee(true)}><span className="icon-icon-plus"></span>NEW EMPLOYEE</button>
             </div>
           </div>
           <Employees
@@ -284,7 +284,7 @@ function App() {
             <p>Organize your tasks by projects</p>
           </div>
           <div className='button-container'>
-            <button onClick={() => setAddProject(true)}><span class="icon-icon-plus"></span>NEW PROJECT</button>
+            <button onClick={() => setAddProject(true)}><span className="icon-icon-plus"></span>NEW PROJECT</button>
           </div>
         </div>
         <Projects

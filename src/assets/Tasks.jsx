@@ -8,7 +8,8 @@ export default function Tasks(props) {
     const isUpdating = (task) => props.activeTask && props.activeTask.type === 'updating' && props.activeTask.id === task.id;
     const classIcon = (task) => task.isOpened ? "icon-circle-up" : "icon-circle-down";
 
-    function toggleShowTask(task) {
+    function toggleShowTask(e, task) {
+        e.stopPropagation();
         props.openTask(task.id);
     }
 
@@ -32,10 +33,10 @@ export default function Tasks(props) {
 
     const displayTasks = props.tasks.map(task => (
         <div key={task.id} className='item'>
-            <div className='item__header'>
-                <h4>{task.title}</h4>
-                {task.assignedTo === '' && <span className='error-message'><span class="icon-notification"></span>Task is not assigned</span>}
-                <span onClick={() => toggleShowTask(task)} className={classIcon(task)}></span>
+            <div className='item__header' onClick={(event) => toggleShowTask(event, task)}>
+                <h4 className='item__title'>{task.title}</h4>
+                {task.assignedTo === '' && <span className='error-message'><span className="icon-notification"></span>Task is not assigned</span>}
+                <span onClick={(event) => toggleShowTask(event, task)} className={classIcon(task)}></span>
             </div>
             {!isUpdating(task) && task.isOpened &&
                 <div className='item__content'>
@@ -69,7 +70,7 @@ export default function Tasks(props) {
 
     return (
         <>
-            {props.tasks.length > 0 ? displayTasks : <p>You have no tasks. Click on "NEW TASK" to get started!</p>}
+            {props.tasks.length > 0 ? displayTasks : <p className='info-message'>You have no tasks. Click on "NEW TASK" to get started!</p>}
             {props.addTask &&
                 <TaskForm                    
                     employees={props.employees}

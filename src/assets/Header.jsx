@@ -9,9 +9,10 @@ export default function Header(props) {
     const totalNumberOfTasks = props.tasksData.length;
     const numberOfCompletedTasks = props.tasksData.filter(task => task.isCompleted).length;
     const percentageOfCompletedTasks = Math.floor(numberOfCompletedTasks / totalNumberOfTasks * 100);
+    const displayedPercentage = percentageOfCompletedTasks ? percentageOfCompletedTasks : 0;
 
     const styles = {
-        backgroundImage: `conic-gradient(#B5838D ${percentageOfCompletedTasks}%, #FFCDB2 0)`
+        backgroundImage: `conic-gradient(#747bff ${percentageOfCompletedTasks}%, #ccc 0)`
     }
 
     return (
@@ -19,14 +20,14 @@ export default function Header(props) {
             <h1 className='header__title'>Task manager</h1>
             <div className='header__stats'>
                 <div className='header__top-five'>
-                    <h3 className='header__top-five-title'><span class="icon-trophy"></span> Top 5 <span class="icon-trophy"></span></h3>
+                    <h3 className='header__top-five-title'><span className="icon-trophy"></span> Top 5 <span className="icon-trophy"></span></h3>
                     <div className='header__top-five-list'>
                         {topFiveElements}
                     </div>
                 </div>
                 <div className='header__gradient' style={styles}>
                     <div className='header__numOfTasks'>
-                        <div className='header__numOfTasks-percentage'>{percentageOfCompletedTasks}%</div>
+                        <div className='header__numOfTasks-percentage'>{displayedPercentage}%</div>
                         <div className='header__numOfTasks-text'>of tasks have been completed!</div>
                     </div>
                 </div>

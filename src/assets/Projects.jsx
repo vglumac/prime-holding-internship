@@ -7,7 +7,8 @@ export default function Projects(props) {
     const isUpdating = (project) => props.activeProject && props.activeProject.type === 'updating' && props.activeProject.id === project.id;
     const classIcon = (project) => project.isOpened ? "icon-circle-up" : "icon-circle-down";
 
-    function toggleShowProject(project) {
+    function toggleShowProject(event, project) {
+        event.stopPropagation();
         props.openProject(project.id);
     }
 
@@ -22,7 +23,7 @@ export default function Projects(props) {
     function getTasks(project) {
         if (project.tasks.length > 0) {
             return (
-                <ul>
+                <ul className='item-list'>
                     {project.tasks.map(task => <li key={task.value}>{task.label}</li>)}
                 </ul>
             )
@@ -31,19 +32,20 @@ export default function Projects(props) {
     }
 
     const displayProjects = props.projects.map(project => (
-        <div key={project.id}>
-            <div className="item__header">
-                <h4>{project.title}</h4>
-                <span onClick={() => toggleShowProject(project)} className={classIcon(project)}></span>
+        <div key={project.id} className='item'>
+            <div className='item__header' onClick={(event) => toggleShowProject(event, project)}>
+                <h4 className='item__title'>{project.title}</h4>
+                <span onClick={(event) => toggleShowProject(event, project)} className={classIcon(project)}></span>
             </div>
             {!isUpdating(project) && project.isOpened &&
-                <div>
+                <div className='item__content'>
                     <div>Description: {project.description}</div>
-
                     <div>Tasks: {getTasks(project)}</div>
                     <div>Completed: {Math.floor(project.numOfCompletedTasks / project.numOfAssignedTasks * 100)} %</div>
-                    <button onClick={() => handleUpdateClick(project)}><span className="icon-icon-edit"></span>Edit</button>
-                    <button onClick={() => handleDeleteClick(project)}><span className="icon-icon-delete"></span>Delete</button>
+                    <div className='group-buttons'>
+                        <button onClick={() => handleUpdateClick(project)}><span className="icon-icon-edit"></span>Edit</button>
+                        <button onClick={() => handleDeleteClick(project)}><span className="icon-icon-delete"></span>Delete</button>
+                    </div>
                 </div>}
             {isUpdating(project) &&
                 <div>
@@ -66,7 +68,7 @@ export default function Projects(props) {
 
     return (
         <>
-            {props.projects.length > 0 ? displayProjects : <p>You haven't defined any projects. Click on "NEW PROJECTS" to get started!</p>}
+            {props.projects.length > 0 ? displayProjects : <p className='info-message'>You haven't defined any projects. Click on "NEW PROJECTS" to get started!</p>}
             {props.addProject &&
                 <ProjectForm
                     tasks={props.tasks}
