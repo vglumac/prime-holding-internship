@@ -45,6 +45,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-trophy {
+  margin: 0 0.5em;
+}
+
 .icon-icon-delete:before {
   content: "\61";
 }

@@ -20,7 +20,7 @@ export default function Header(props) {
             <h1 className='header__title'>Task manager</h1>
             <div className='header__stats'>
                 <div className='header__top-five'>
-                    <h3 className='header__top-five-title'><span className="icon-trophy"></span> Top 5 <span className="icon-trophy"></span></h3>
+                    <h3 className='header__top-five-title'><span className="icon-trophy"></span>Top 5<span className="icon-trophy"></span></h3>
                     <div className='header__top-five-list'>
                         {topFiveElements}
                     </div>
