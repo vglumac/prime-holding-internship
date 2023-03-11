@@ -6,6 +6,7 @@ export default function Projects(props) {
     const isDeleting = (project) => props.confirmDeleteModal && props.confirmDeleteModal.type === 'delete' && props.confirmDeleteModal.id === project.id;
     const isUpdating = (project) => props.activeProject && props.activeProject.type === 'updating' && props.activeProject.id === project.id;
     const classIcon = (project) => project.isOpened ? "icon-circle-up" : "icon-circle-down";
+    const classCompleted = (project) => project.numOfAssignedTasks > 0 && project.numOfCompletedTasks === project.numOfAssignedTasks ? 'item--completed' : '';
 
     function toggleShowProject(event, project) {
         event.stopPropagation();
@@ -29,15 +30,13 @@ export default function Projects(props) {
             )
         }
         return project.tasks.label
-    }
-
-    const classCompleted = (project) => project.numOfAssignedTasks > 0 && project.numOfCompletedTasks === project.numOfAssignedTasks ? 'item--completed' : '';
+    }    
 
     const displayProjects = props.projects.map(project => (
         <div key={project.id} className={`item ${classCompleted(project)}`}>
             <div className='item__header' onClick={(event) => toggleShowProject(event, project)}>
                 <h4 className='item__title'>{project.title}</h4>
-                <span onClick={(event) => toggleShowProject(event, project)} className={classIcon(project)}></span>
+                <span className={classIcon(project)}></span>
             </div>
             {!isUpdating(project) && project.isOpened &&
                 <div className='item__content'>

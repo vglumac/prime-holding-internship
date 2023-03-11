@@ -7,6 +7,12 @@ export default function Tasks(props) {
     const isDeleting = (task) => props.confirmDeleteModal && props.confirmDeleteModal.type === 'delete' && props.confirmDeleteModal.id === task.id;
     const isUpdating = (task) => props.activeTask && props.activeTask.type === 'updating' && props.activeTask.id === task.id;
     const classIcon = (task) => task.isOpened ? "icon-circle-up" : "icon-circle-down";
+    const classCompleted = (task) => task.isCompleted ? 'item--completed' : '';    
+    const compareDates = (task) => {
+        const dueDate = new Date(task.dueDate);
+        const now = new Date();
+        return dueDate.getTime() < now.getTime();
+    };
 
     function toggleShowTask(e, task) {
         e.stopPropagation();
@@ -29,14 +35,7 @@ export default function Tasks(props) {
             }
         })
         return employeeName;
-    }
-
-    const classCompleted = (task) => task.isCompleted ? 'item--completed' : '';
-    const compareDates = (task) => {
-        const dueDate = new Date(task.dueDate);
-        const now = new Date();
-        return dueDate.getTime() < now.getTime();
-    };
+    }   
 
     const displayTasks = props.tasks.map(task => (
         <div key={task.id} className={`item ${classCompleted(task)}`}>
@@ -46,7 +45,7 @@ export default function Tasks(props) {
                     {task.assignedTo === '' && <div className='error-message'><span className="icon-notification"></span>Employee not assigned</div>}
                     {compareDates(task) && <div className='error-message'><span className="icon-notification"></span>Task is overdue</div>}
                 </div>
-                <span onClick={(event) => toggleShowTask(event, task)} className={classIcon(task)}></span>
+                <span className={classIcon(task)}></span>
             </div>
             {!isUpdating(task) && task.isOpened &&
                 <div className='item__content'>

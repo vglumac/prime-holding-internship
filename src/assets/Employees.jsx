@@ -25,7 +25,7 @@ export default function Employees(props) {
         <div key={employee.id} className='item'>
             <div className="item__header" onClick={(e) => toggleShowEmployee(e, employee)}>
                 <h4 className='item__title'>{employee.name}</h4>
-                <span onClick={(e) => toggleShowEmployee(e, employee)} className={classIcon(employee)}></span>
+                <span className={classIcon(employee)}></span>
             </div>
             {!isUpdating(employee) && employee.isOpened &&
                 <div className='item__content'>

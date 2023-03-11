@@ -96,7 +96,7 @@
 
 .header__top-five {
   flex: 2;
-  border: 1px solid #213547;
+  border: 1px solid #646cff;
   padding: 1em;
   border-radius: 10px;
 }
@@ -167,6 +167,10 @@
 }
 
 @media (prefers-color-scheme: light) {
+  .header__top-five {
+    border-color: #213547;    
+  }
+
   .header__top-five-item {
     background-color: #e8e8e8;
   }
@@ -210,6 +214,7 @@
   background-color: #1a1a1a;
   border-radius: 5px;
   padding: 0.3em 0.5em;
+  cursor: pointer;
 }
 
 .item__title {
