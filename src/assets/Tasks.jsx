@@ -44,7 +44,7 @@ export default function Tasks(props) {
                 <h4 className='item__title'>{task.title}</h4>
                 <div>
                     {task.assignedTo === '' && <div className='error-message'><span className="icon-notification"></span>Employee not assigned</div>}
-                    {compareDates(task) && <div className='error-message'><span className="icon-notification"></span>Due date expired</div>}
+                    {compareDates(task) && <div className='error-message'><span className="icon-notification"></span>Task is overdue</div>}
                 </div>
                 <span onClick={(event) => toggleShowTask(event, task)} className={classIcon(task)}></span>
             </div>
