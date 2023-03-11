@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import EmployeeForm from './EmployeeForm';
 import DeleteModal from './DeleteModal';
 
@@ -30,9 +30,9 @@ export default function Employees(props) {
             {!isUpdating(employee) && employee.isOpened &&
                 <div className='item__content'>
                     <div>E-mail: {employee.email}</div>
-                    <div>Phone number: {employee.phone}</div>
-                    <div>Date of birth: {employee.dob}</div>
-                    <div>Salary: {employee.salary}</div>
+                    <div>Phone number: {employee.phone ? employee.phone : '(no data)'}</div>
+                    <div>Date of birth: {employee.dob ? employee.dob : '(no data)'}</div>
+                    <div>Salary: {employee.salary ? employee.salary : '(no data)'}</div>
                     <div className='group-buttons'>
                         <button onClick={() => handleUpdateClick(employee)}><span className="icon-icon-edit"></span>Edit</button>
                         <button onClick={() => handleDeleteClick(employee)}><span className="icon-icon-delete"></span>Delete</button>

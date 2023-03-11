@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function TaskForm(props) {
     const [task, setTask] = useState({
@@ -9,6 +9,11 @@ export default function TaskForm(props) {
         assignedTo: props.taskData ? props.taskData.assignedTo : '',
         dueDate: props.taskData ? props.taskData.dueDate : '',
         isCompleted: props.taskData ? props.taskData.isCompleted : false
+    })
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
     })
 
     function handleChange(e) {
@@ -43,12 +48,18 @@ export default function TaskForm(props) {
         }
     }
 
+    function handleKeyDown(event) {
+        if (event.key === 'Escape') {
+            handleCancel();
+        }  
+    };
+
     return (
         <div className='modal-container'>
             <div className='modal'>
                 <div className='modal__title'>Task details:</div>
                 <form>
-                    <label>Title:
+                    <label>Title<span title ='This field is required' className='input--required'></span>:
                         <input
                             name='title'
                             value={task.title}

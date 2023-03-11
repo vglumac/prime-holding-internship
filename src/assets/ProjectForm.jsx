@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Select from 'react-select';
 
 export default function ProjectForm(props) {
@@ -10,6 +10,11 @@ export default function ProjectForm(props) {
         tasks: props.projectData ? props.projectData.tasks : '',
         numOfAssignedTasks: props.projectData ? props.projectData.numOfAssignedTasks : '',
         numOfCompletedTasks: props.projectData ? props.projectData.numOfCompletedTasks : ''
+    })
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
     })
 
     function handleChange(e) {
@@ -54,12 +59,18 @@ export default function ProjectForm(props) {
 
     }
 
+    function handleKeyDown(event) {
+        if (event.key === 'Escape') {
+            handleCancel();
+        }  
+    };
+
     return (
         <div className='modal-container'>
             <div className='modal'>
                 <div className='modal__title'>Project details:</div>
                 <form>
-                    <label>Title:
+                    <label>Title<span title ='This field is required' className='input--required'></span>:
                         <input
                             name='title'
                             type='text'

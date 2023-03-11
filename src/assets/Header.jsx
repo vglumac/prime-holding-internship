@@ -4,7 +4,7 @@ export default function Header(props) {
 
     const sortByCompletedTasks = (a, b) => b.completedTasks - a.completedTasks;
     const topFive = props.employeesData.map(employee => ({ id: employee.id, name: employee.name, completedTasks: employee.numOfCompletedTasks })).sort(sortByCompletedTasks).slice(0, 5);
-    const topFiveElements = topFive.map(employee => <div key={employee.id} className='header__top-five-item'>{employee.name}</div>);
+    const topFiveElements = topFive.map((employee, index) => <div key={employee.id} className='header__top-five-item'>{index + 1}. {employee.name}: {employee.completedTasks}</div>);
 
     const totalNumberOfTasks = props.tasksData.length;
     const numberOfCompletedTasks = props.tasksData.filter(task => task.isCompleted).length;

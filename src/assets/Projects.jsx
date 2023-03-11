@@ -31,17 +31,19 @@ export default function Projects(props) {
         return project.tasks.label
     }
 
+    const classCompleted = (project) => project.numOfAssignedTasks > 0 && project.numOfCompletedTasks === project.numOfAssignedTasks ? 'item--completed' : '';
+
     const displayProjects = props.projects.map(project => (
-        <div key={project.id} className='item'>
+        <div key={project.id} className={`item ${classCompleted(project)}`}>
             <div className='item__header' onClick={(event) => toggleShowProject(event, project)}>
                 <h4 className='item__title'>{project.title}</h4>
                 <span onClick={(event) => toggleShowProject(event, project)} className={classIcon(project)}></span>
             </div>
             {!isUpdating(project) && project.isOpened &&
                 <div className='item__content'>
-                    <div>Description: {project.description}</div>
-                    <div>Tasks: {getTasks(project)}</div>
-                    <div>Completed: {Math.floor(project.numOfCompletedTasks / project.numOfAssignedTasks * 100)} %</div>
+                    <div>Description: {project.description ? project.description : '(no description)'}</div>
+                    <div>Tasks: {getTasks(project) ? getTasks(project) : '(no tasks yet)'}</div>
+                    <div>Completed: {project.numOfCompletedTasks ? Math.floor(project.numOfCompletedTasks / project.numOfAssignedTasks * 100) : 0} %</div>
                     <div className='group-buttons'>
                         <button onClick={() => handleUpdateClick(project)}><span className="icon-icon-edit"></span>Edit</button>
                         <button onClick={() => handleDeleteClick(project)}><span className="icon-icon-delete"></span>Delete</button>

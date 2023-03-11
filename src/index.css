@@ -97,6 +97,11 @@ input[type='checkbox']:checked::before {
   left: 25%;
 }
 
+.input--required::before {
+  content: '*';
+  color: #ED6468;
+}
+
 .select {
   color: #242424;
 }

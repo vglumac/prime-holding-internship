@@ -19,6 +19,8 @@ function App() {
   const [activeEmployee, setActiveEmployee] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
   const [confirmDeleteModal, setConfirmDeleteModal] = useState(null);
+  const sortByCompletedTasks = (a, b) => a.isCompleted - b.isCompleted;
+  const sortByCompletedProjects = (a, b) => (a.numOfAssignedTasks === a.numOfCompletedTasks) - (b.numOfAssignedTasks === b.numOfCompletedTasks);
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -26,10 +28,8 @@ function App() {
     localStorage.setItem('projects', JSON.stringify(projects));
   }, [tasks, employees, projects])
 
-  //Update number of assigned tasks
-  //Update number of completed tasks in project
-
   useEffect(() => {
+    //Update number of assigned tasks
     setEmployees(prevEmployees => {
       return prevEmployees.map(prevEmployee => {
         let taskNum = 0;
@@ -49,6 +49,7 @@ function App() {
         }
       })
     })
+    //Update number of completed tasks in project
     setProjects(prevProjects => {
       return prevProjects.map(prevProject => {
         if (prevProject.tasks.length > 0) {
@@ -70,7 +71,7 @@ function App() {
           }
         }
         return prevProject
-      })
+      }).sort(sortByCompletedProjects);
     })
   }, [tasks])
 
@@ -80,9 +81,8 @@ function App() {
       id: nanoid(),
       isOpened: false
     }
-    setTasks(prevTasks => [...prevTasks, newTask])
+    setTasks(prevTasks => [newTask, ...prevTasks])
   }
-
 
   function createNewEmployee(newEmployeeData) {
     const newEmployee = {
@@ -103,8 +103,8 @@ function App() {
       numOfCompletedTasks: newProjectData.tasks.length > 0 ? newProjectData.tasks.filter(task => task.isCompleted).length : 0,
       isOpened: false
     }
-    setProjects(prevProjects => [...prevProjects, newProject])
-  }
+    setProjects(prevProjects => [newProject, ...prevProjects])
+  }  
 
   function updateTask(updatedTask) {
     setTasks(prevTasks => {
@@ -120,7 +120,7 @@ function App() {
           }
         }
         return task;
-      })
+      }).sort(sortByCompletedTasks);
     })
     setActiveTask(null)
   }
@@ -142,8 +142,8 @@ function App() {
       })
     })
     setActiveEmployee(null);
-  }
-
+  }  
+ 
   function updateProject(updatedProject) {
     setProjects(prevProjects => {
       return prevProjects.map(project => {
@@ -158,7 +158,7 @@ function App() {
           }
         }
         return project;
-      })
+      }).sort(sortByCompletedProjects)
     })
     setActiveProject(null)
   }

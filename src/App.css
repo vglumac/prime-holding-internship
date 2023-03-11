@@ -199,6 +199,10 @@
   border-radius: 5px;
 }
 
+.item--completed {
+  color: #a0a5fe;
+}
+
 .item__header {
   display: flex;
   justify-content: space-between;

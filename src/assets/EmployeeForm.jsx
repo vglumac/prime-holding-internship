@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function EmployeeForm(props) {
     const [employee, setEmployee] = useState({
@@ -9,6 +9,11 @@ export default function EmployeeForm(props) {
         phone: props.employeeData ? props.employeeData.phone : '',
         dob: props.employeeData ? props.employeeData.dob : '',
         salary: props.employeeData ? props.employeeData.salary : ''
+    })
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
     })
 
     function handleChange(e) {
@@ -43,27 +48,37 @@ export default function EmployeeForm(props) {
         }
     }
 
+    function handleKeyDown(event) {
+        if (event.key === 'Escape') {
+            handleCancel();
+        }  
+    };
+
     return (
         <div className='modal-container'>
             <div className='modal'>
                 <div className='modal__title'>Employee details:</div>
                 <form>
-                    <label>Full Name:
-                        <input                            
+                    <label>Full Name<span title='This field is required' className='input--required'></span>:
+                        <input
                             name='name'
                             type='text'
                             value={employee.name}
                             onChange={handleChange}
                             required
+                            pattern='^[A-z][A-z]+( [A-z][A-z]+){1,}$'
+                            title='Please enter full name of employee'
                         />
                     </label>
-                    <label>E-mail:
+                    <label>E-mail<span title='This field is required' className='input--required'></span>:
                         <input
                             name='email'
                             type='email'
                             value={employee.email}
                             onChange={handleChange}
                             required
+                            pattern='[A-Za-z0-9._+-]+@[A-Za-z0-9 -]+\.[a-z]{2,}'
+                            title='Please enter a valid email address'
                         />
                     </label>
                     <label>Phone number:
@@ -96,6 +111,6 @@ export default function EmployeeForm(props) {
                     </div>
                 </form>
             </div>
-        </div>               
+        </div>
     )
 }

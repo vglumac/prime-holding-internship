@@ -23,7 +23,7 @@ export default function Tasks(props) {
 
     function getAssignedToName(task) {
         let employeeName;
-        props.employees.forEach(employee => {            
+        props.employees.forEach(employee => {
             if (task.assignedTo === employee.id) {
                 employeeName = employee.name;
             }
@@ -31,18 +31,28 @@ export default function Tasks(props) {
         return employeeName;
     }
 
+    const classCompleted = (task) => task.isCompleted ? 'item--completed' : '';
+    const compareDates = (task) => {
+        const dueDate = new Date(task.dueDate);
+        const now = new Date();
+        return dueDate.getTime() < now.getTime();
+    };
+
     const displayTasks = props.tasks.map(task => (
-        <div key={task.id} className='item'>
+        <div key={task.id} className={`item ${classCompleted(task)}`}>
             <div className='item__header' onClick={(event) => toggleShowTask(event, task)}>
                 <h4 className='item__title'>{task.title}</h4>
-                {task.assignedTo === '' && <span className='error-message'><span className="icon-notification"></span>Task is not assigned</span>}
+                <div>
+                    {task.assignedTo === '' && <div className='error-message'><span className="icon-notification"></span>Employee not assigned</div>}
+                    {compareDates(task) && <div className='error-message'><span className="icon-notification"></span>Due date expired</div>}
+                </div>
                 <span onClick={(event) => toggleShowTask(event, task)} className={classIcon(task)}></span>
             </div>
             {!isUpdating(task) && task.isOpened &&
                 <div className='item__content'>
-                    <div>Description: {task.description}</div>
-                    <div>Due date: {task.dueDate}</div>
-                    <div>Assigned to: {getAssignedToName(task)}</div>
+                    <div>Description: {task.description ? task.description : '(no description)'}</div>
+                    <div>Due date: {task.dueDate ? task.dueDate : '(no due date)'}</div>
+                    <div>Assigned to: {getAssignedToName(task) ? getAssignedToName(task) : '(not assigned)'}</div>
                     <div>Completed: {task.isCompleted ? "Yes" : "No"}</div>
                     <div className='group-buttons'>
                         <button onClick={() => handleUpdateClick(task)}><span className="icon-icon-edit"></span>Edit</button>
@@ -72,7 +82,7 @@ export default function Tasks(props) {
         <>
             {props.tasks.length > 0 ? displayTasks : <p className='info-message'>You have no tasks. Click on "NEW TASK" to get started!</p>}
             {props.addTask &&
-                <TaskForm                    
+                <TaskForm
                     employees={props.employees}
                     setAddTask={props.setAddTask}
                     createNewTask={props.createNewTask}
