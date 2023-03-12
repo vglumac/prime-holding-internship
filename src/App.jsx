@@ -3,9 +3,8 @@ import Header from './assets/Header';
 import Tasks from './assets/Tasks';
 import Employees from './assets/Employees';
 import Projects from './assets/Projects';
-
-import { nanoid } from 'nanoid'
-import './App.css'
+import { nanoid } from 'nanoid';
+import './App.css';
 
 function App() {
 
@@ -26,7 +25,7 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     localStorage.setItem('employees', JSON.stringify(employees));
     localStorage.setItem('projects', JSON.stringify(projects));
-  }, [tasks, employees, projects])
+  }, [tasks, employees, projects]);
 
   useEffect(() => {
     //Update number of assigned tasks
@@ -73,7 +72,7 @@ function App() {
         return prevProject
       }).sort(sortByCompletedProjects);
     })
-  }, [tasks])
+  }, [tasks]);
 
   function createNewTask(newTaskData) {
     const newTask = {
@@ -81,7 +80,7 @@ function App() {
       id: nanoid(),
       isOpened: false
     }
-    setTasks(prevTasks => [newTask, ...prevTasks])
+    setTasks(prevTasks => [newTask, ...prevTasks]);
   }
 
   function createNewEmployee(newEmployeeData) {
@@ -92,7 +91,7 @@ function App() {
       numOfCompletedTasks: 0,
       isOpened: false
     }
-    setEmployees(prevEmployees => [...prevEmployees, newEmployee])
+    setEmployees(prevEmployees => [...prevEmployees, newEmployee]);
   }
 
   function createNewProject(newProjectData) {
@@ -103,7 +102,7 @@ function App() {
       numOfCompletedTasks: newProjectData.tasks.length > 0 ? newProjectData.tasks.filter(task => task.isCompleted).length : 0,
       isOpened: false
     }
-    setProjects(prevProjects => [newProject, ...prevProjects])
+    setProjects(prevProjects => [newProject, ...prevProjects]);
   }  
 
   function updateTask(updatedTask) {
@@ -122,7 +121,7 @@ function App() {
         return task;
       }).sort(sortByCompletedTasks);
     })
-    setActiveTask(null)
+    setActiveTask(null);
   }
 
   function updateEmployee(updatedEmployee) {
@@ -158,14 +157,14 @@ function App() {
           }
         }
         return project;
-      }).sort(sortByCompletedProjects)
+      }).sort(sortByCompletedProjects);
     })
-    setActiveProject(null)
+    setActiveProject(null);
   }
 
   function deleteTask(taskId) {
     setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
-    setConfirmDeleteModal(null)
+    setConfirmDeleteModal(null);
   }
 
   function deleteEmployee(employeeId) {
@@ -175,7 +174,7 @@ function App() {
 
   function deleteProject(projectId) {
     setProjects(prevProjects => prevProjects.filter(project => project.id !== projectId));
-    setConfirmDeleteModal(null)
+    setConfirmDeleteModal(null);
   }
 
   function openTask(taskID) {
@@ -228,13 +227,13 @@ function App() {
       />
       <main>
         <section>
-          <div className="section__header">
+          <div className='section__header'>
             <div>
               <h2>Tasks</h2>
               <p>Assign task to your employees</p>
             </div>
             <div className='button-container'>
-              <button onClick={() => setAddTask(true)}><span className="icon-icon-plus"></span>NEW TASK</button>
+              <button onClick={() => setAddTask(true)}><span className='icon-icon-plus'></span>NEW TASK</button>
             </div>
           </div>
           <Tasks
@@ -253,13 +252,13 @@ function App() {
           />
         </section>
         <section>
-          <div className="section__header">
+          <div className='section__header'>
             <div>
               <h2>Employees</h2>
               <p>Enter employees' info</p>
             </div>
             <div className='button-container'>
-              <button onClick={() => setAddEmployee(true)}><span className="icon-icon-plus"></span>NEW EMPLOYEE</button>
+              <button onClick={() => setAddEmployee(true)}><span className='icon-icon-plus'></span>NEW EMPLOYEE</button>
             </div>
           </div>
           <Employees
@@ -278,13 +277,13 @@ function App() {
         </section>
       </main>
       <section>
-        <div className="section__header">
+        <div className='section__header'>
           <div>
             <h2>Projects</h2>
             <p>Organize your tasks by projects</p>
           </div>
           <div className='button-container'>
-            <button onClick={() => setAddProject(true)}><span className="icon-icon-plus"></span>NEW PROJECT</button>
+            <button onClick={() => setAddProject(true)}><span className='icon-icon-plus'></span>NEW PROJECT</button>
           </div>
         </div>
         <Projects
@@ -306,4 +305,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

@@ -10,12 +10,12 @@ export default function ProjectForm(props) {
         tasks: props.projectData ? props.projectData.tasks : '',
         numOfAssignedTasks: props.projectData ? props.projectData.numOfAssignedTasks : '',
         numOfCompletedTasks: props.projectData ? props.projectData.numOfCompletedTasks : ''
-    })
+    });
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    })
+    });
 
     function handleChange(e) {
         setProject(prev => {

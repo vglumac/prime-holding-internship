@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React from 'react';
+import { useState, useEffect } from 'react';
 
 export default function TaskForm(props) {
     const [task, setTask] = useState({
@@ -9,12 +9,12 @@ export default function TaskForm(props) {
         assignedTo: props.taskData ? props.taskData.assignedTo : '',
         dueDate: props.taskData ? props.taskData.dueDate : '',
         isCompleted: props.taskData ? props.taskData.isCompleted : false
-    })
+    });
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    })
+    });
 
     function handleChange(e) {
         const { name, value, type, checked } = e.target;

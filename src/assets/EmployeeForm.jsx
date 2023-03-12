@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React from 'react';
+import { useState, useEffect } from 'react';
 
 export default function EmployeeForm(props) {
     const [employee, setEmployee] = useState({
@@ -9,12 +9,12 @@ export default function EmployeeForm(props) {
         phone: props.employeeData ? props.employeeData.phone : '',
         dob: props.employeeData ? props.employeeData.dob : '',
         salary: props.employeeData ? props.employeeData.salary : ''
-    })
+    });
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    })
+    });
 
     function handleChange(e) {
         setEmployee(prev => {

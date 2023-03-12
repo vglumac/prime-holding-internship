@@ -1,11 +1,11 @@
 import React from 'react';
 import DeleteModal from './DeleteModal';
-import ProjectForm from './ProjectForm'
+import ProjectForm from './ProjectForm';
 
 export default function Projects(props) {
     const isDeleting = (project) => props.confirmDeleteModal && props.confirmDeleteModal.type === 'delete' && props.confirmDeleteModal.id === project.id;
     const isUpdating = (project) => props.activeProject && props.activeProject.type === 'updating' && props.activeProject.id === project.id;
-    const classIcon = (project) => project.isOpened ? "icon-circle-up" : "icon-circle-down";
+    const classIcon = (project) => project.isOpened ? 'icon-circle-up' : 'icon-circle-down';
     const classCompleted = (project) => project.numOfAssignedTasks > 0 && project.numOfCompletedTasks === project.numOfAssignedTasks ? 'item--completed' : '';
 
     function toggleShowProject(event, project) {
@@ -14,11 +14,11 @@ export default function Projects(props) {
     }
 
     function handleDeleteClick(project) {
-        props.setConfirmDeleteModal({ id: project.id, type: 'delete' })
+        props.setConfirmDeleteModal({ id: project.id, type: 'delete' });
     }
 
     function handleUpdateClick(project) {
-        props.setActiveProject({ id: project.id, type: 'updating' })
+        props.setActiveProject({ id: project.id, type: 'updating' });
     }
 
     function getTasks(project) {
@@ -29,8 +29,8 @@ export default function Projects(props) {
                 </ul>
             )
         }
-        return project.tasks.label
-    }    
+        return project.tasks.label;
+    }
 
     const displayProjects = props.projects.map(project => (
         <div key={project.id} className={`item ${classCompleted(project)}`}>
