@@ -33,8 +33,8 @@ export default function Projects(props) {
     }
 
     const displayProjects = props.projects.map(project => (
-        <div key={project.id} className={`item ${classCompleted(project)}`}>
-            <div className='item__header' onClick={(event) => toggleShowProject(event, project)}>
+        <div key={project.id} className='item'>
+            <div className={`item__header ${classCompleted(project)}`} onClick={(event) => toggleShowProject(event, project)}>
                 <h4 className='item__title'>{project.title}</h4>
                 <span className={classIcon(project)}></span>
             </div>

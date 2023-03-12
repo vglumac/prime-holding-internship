@@ -38,8 +38,8 @@ export default function Tasks(props) {
     }   
 
     const displayTasks = props.tasks.map(task => (
-        <div key={task.id} className={`item ${classCompleted(task)}`}>
-            <div className='item__header' onClick={(event) => toggleShowTask(event, task)}>
+        <div key={task.id} className='item'>
+            <div className={`item__header ${classCompleted(task)}`} onClick={(event) => toggleShowTask(event, task)}>
                 <h4 className='item__title'>{task.title}</h4>
                 <div>
                     {!task.isCompleted && task.assignedTo === '' && <div className='error-message'><span className='icon-notification'></span>Employee not assigned</div>}
