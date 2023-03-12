@@ -52,7 +52,7 @@ export default function EmployeeForm(props) {
         if (event.key === 'Escape') {
             handleCancel();
         }  
-    };
+    }
 
     return (
         <div className='modal-container'>
