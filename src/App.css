@@ -38,7 +38,7 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  margin-right: 0.5em;
+  margin-right: 0.5rem;
 
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
@@ -46,7 +46,7 @@
 }
 
 .icon-trophy {
-  margin: 0 0.5em;
+  margin: 0 0.5rem;
 }
 
 .icon-icon-delete:before {
@@ -80,8 +80,8 @@
 /* Header */
 
 .header {
-  border-bottom: 0.2em solid #f9f9f9;
-  margin-bottom: 1em;
+  border-bottom: 0.2rem solid #f9f9f9;
+  margin-bottom: 1rem;
 }
 
 .header__title {
@@ -97,25 +97,25 @@
 .header__top-five {
   flex: 2;
   border: 1px solid #646cff;
-  padding: 1em;
+  padding: 1rem;
   border-radius: 10px;
 }
 
 .header__top-five-title {
   text-align: center;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 .header__top-five-list {
   display: flex;
-  gap: 0.5em;
+  gap: 0.5rem;
   justify-content: space-around;
 }
 
 .header__top-five-item {
   flex-basis: 0;
   flex-grow: 1;
-  padding: 0.3em;
+  padding: 0.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,7 +161,7 @@
 
   .header__top-five-list {
     flex-direction: column;
-    gap: 0.5em;
+    gap: 0.5rem;
     justify-content: space-around;
   }
 }
@@ -185,7 +185,7 @@
 .section__header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
   border-bottom: 1px dotted rgba(255, 255, 255, 0.87);
 }
 
@@ -199,7 +199,7 @@
 
 .item {
   background-color: #303030;
-  margin-bottom: 0.3em;
+  margin-bottom: 0.3rem;
   border-radius: 5px;
 }
 
@@ -213,7 +213,7 @@
   align-items: center;
   background-color: #1a1a1a;
   border-radius: 5px;
-  padding: 0.3em 0.5em;
+  padding: 0.3rem 0.5rem;
   cursor: pointer;
 }
 
@@ -222,11 +222,11 @@
 }
 
 .item__content {
-  padding: 0.3em 0.5em;
+  padding: 0.3rem 0.5rem;
 }
 
 .item-list {
-  margin-left: 2em;
+  margin-left: 2rem;
 }
 
 @media (prefers-color-scheme: light) {
@@ -253,15 +253,15 @@
 
 .modal {
   background-color: #242424;
-  padding: 2em;
+  padding: 2rem;
   border-radius: 10px;
   width: 70vw;
-  margin: 0.5em;
+  margin: 0.5rem;
 }
 
 .modal__title,
 .modal__message {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 @media (prefers-color-scheme: light) {

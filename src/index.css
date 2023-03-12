@@ -20,6 +20,10 @@
   }
 }
 
+html {
+  padding-right: 17px;
+}
+
 body {
   margin: 0 auto;
   display: block;

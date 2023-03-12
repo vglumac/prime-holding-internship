@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import Header from './assets/Header';
-import Tasks from './assets/Tasks';
-import Employees from './assets/Employees';
-import Projects from './assets/Projects';
+import Header from './components/Header';
+import Tasks from './components/Tasks';
+import Employees from './components/Employees';
+import Projects from './components/Projects';
 import { nanoid } from 'nanoid';
 import './App.css';
 
@@ -52,21 +52,22 @@ function App() {
     setProjects(prevProjects => {
       return prevProjects.map(prevProject => {
         if (prevProject.tasks.length > 0) {
+          const projectTasks = prevProject.tasks.map(projectTask => {
+            let isTaskCompleted = false;
+            tasks.forEach(task => {
+              if (task.id === projectTask.value) {
+                isTaskCompleted = task.isCompleted;
+              }
+            })
+            return {
+              ...projectTask,
+              isCompleted: isTaskCompleted
+            }
+          })
           return {
             ...prevProject,
-            tasks: prevProject.tasks.map(projectTask => {
-              let isTaskCompleted = false;
-              tasks.forEach(task => {
-                if (task.id === projectTask.value) {
-                  isTaskCompleted = task.isCompleted;
-                }
-              })
-              return {
-                ...projectTask,
-                isCompleted: isTaskCompleted
-              }
-            }),
-            numOfCompletedTasks: prevProject.tasks.filter(task => task.isCompleted).length //radi tek pri sledecem renderu
+            tasks: projectTasks,
+            numOfCompletedTasks: projectTasks.filter(task => task.isCompleted).length 
           }
         }
         return prevProject
