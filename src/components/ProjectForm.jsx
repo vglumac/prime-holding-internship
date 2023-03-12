@@ -63,7 +63,7 @@ export default function ProjectForm(props) {
         if (event.key === 'Escape') {
             handleCancel();
         }  
-    };
+    }
 
     return (
         <div className='modal-container'>

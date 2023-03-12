@@ -31,7 +31,7 @@ body {
 
 main {
   display: flex;
-  gap: 2em;
+  gap: 2rem;
   width: 100%;
   justify-content: space-between;
   align-items: flex-start;
@@ -39,13 +39,13 @@ main {
 
 section {
   width: 100%;
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 3.2rem;
   line-height: 1.1;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 a {
@@ -61,8 +61,8 @@ a:hover {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
@@ -104,7 +104,7 @@ textarea,
 select {
   display: block;
   width: 100%;
-  padding: 0.8em;
+  padding: 0.8rem;
   margin: 0.rem 0;
   border-radius: 5px;
   border: 1px solid #DEDDDF;
@@ -112,7 +112,7 @@ select {
 
 textarea {
   resize: none;
-  height: 5em;
+  height: 5rem;
 }
 
 label:has(input[type='checkbox']) {
@@ -125,8 +125,8 @@ input[type='checkbox'] {
   appearance: none;
   display: inline-block;
   position: relative;
-  height: 1.5em;
-  width: 1.5em;  
+  height: 1.5rem;
+  width: 1.5rem;  
   margin: 5px;
   border: 1px solid #34495E;
   border-radius: 50%;
@@ -159,7 +159,7 @@ input[type='checkbox']:checked::before {
 
 .error-message {
   color: #ED6468;
-  padding: 0 1em;
+  padding: 0 1rem;
 }
 
 .info-message {
